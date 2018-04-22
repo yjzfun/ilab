@@ -10,10 +10,30 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-04-21 02:04:38
+Date: 2018-04-22 14:50:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `buy_equipment`
+-- ----------------------------
+DROP TABLE IF EXISTS `buy_equipment`;
+CREATE TABLE `buy_equipment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment_name` varchar(30) NOT NULL,
+  `count` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `request_buy_record_id` int(11) NOT NULL,
+  `lab_id` int(11) NOT NULL,
+  `date_pro` int(11) DEFAULT NULL,
+  `origin` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of buy_equipment
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `delete_record`
@@ -45,6 +65,7 @@ CREATE TABLE `equipment` (
   `request_buy_record_id` int(11) NOT NULL,
   `lab_id` int(11) NOT NULL,
   `delete_record_id` int(11) NOT NULL,
+  `is_deleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_equipment_request_buy_record1_idx` (`request_buy_record_id`),
   KEY `fk_equipment_lab1_idx` (`lab_id`),

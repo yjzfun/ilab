@@ -9,4 +9,6 @@ public interface LabUserDao {
     public User findUserByUserName(String username);
 
     public User findUserById(int id);
+
+    public int editByUser(User user);
 }

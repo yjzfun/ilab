@@ -29,4 +29,9 @@ public class LabUserDaoImpl extends MySqlSessionDaoSupport implements LabUserDao
 
         return getSqlSession().getMapper(LabUserDao.class).findUserById(id);
     }
+
+    @Override
+    public int editByUser(User user) {
+        return getSqlSession().getMapper(LabUserDao.class).editByUser(user);
+    }
 }

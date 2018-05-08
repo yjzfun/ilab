@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import top.yjzloveyzh.common.Constants;
@@ -94,7 +95,7 @@ public class UserController {
         if (user != null) {
             User userInfo = userService.getUserById(user.getId());
             userInfo.setPassword("");
-            request.setAttribute("USER_INFO", userInfo);
+            request.setAttribute(Constants.User.USER_INFO, userInfo);
             System.out.println(userInfo);
         }
 
@@ -114,6 +115,48 @@ public class UserController {
             redirectAttributes.addFlashAttribute("error", "您还未登陆，请登录。");
 
             return "redirect:/user/toLogin";
+        }
+    }
+
+    @RequestMapping(value="/edit", method=RequestMethod.POST)
+    public String edit(HttpSession session, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+
+        User user = (User) session.getAttribute(Constants.User.SESSION_USER_KEY);
+
+        if (user != null) {
+            int id = user.getId();
+            String gender = request.getParameter("gender");
+            String name = request.getParameter("name");
+            String province = request.getParameter("province");
+            String city = request.getParameter("city");
+            String area = request.getParameter("area");
+            String cellphone = request.getParameter("cellphone");
+            String address = request.getParameter("address");
+            String email = request.getParameter("email");
+            String zipCode = request.getParameter("zip");
+
+            try {
+                int count = userService.updateUser(id, gender, name, province, city, area, cellphone,zipCode, address, email);
+
+                if (count > 0) {
+                    redirectAttributes.addFlashAttribute("success", "修改成功。");
+
+                    return "redirect:/user/toUserInfo";
+                } else {
+                    redirectAttributes.addFlashAttribute("error", "修改失败。");
+
+                    return "redirect:/user/toUserInfo";
+                }
+            } catch (UserException userException) {
+                redirectAttributes.addFlashAttribute("error", userException.getMessage());
+
+                return "redirect:/user/toUserInfo";
+            }
+
+        } else {
+            redirectAttributes.addFlashAttribute("error", "您还未登录，请先登录。");
+
+            return "redirect:/user/toUserInfo";
         }
     }
 }

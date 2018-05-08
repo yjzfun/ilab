@@ -2177,16 +2177,28 @@ for (var i = 0; i < city.length; i++) {
         shi.options[shi.length] = new Option("请输入市");
         for (var j = 0; j < city[sheng.selectedIndex - 1].city.length; j++) {
             shi.options[shi.length] = new Option(city[sheng.selectedIndex - 1].city[j].name)
-        }
-
+        };
     }
     shi.onchange = function() {
         qu.options.length = 0;
         qu.options[qu.length] = new Option("请输入区");
         for (var k = 0; k < city[sheng.selectedIndex - 1].city[shi.selectedIndex - 1].area.length; k++) {
             qu.options[qu.length] = new Option(city[sheng.selectedIndex - 1].city[shi.selectedIndex - 1].area[k]);
-        }
-        ;
+        };
     }
-}
-;
+};
+
+$(document).ready(function(){
+    if (userArea) {
+        if (userArea) {
+            let areaArray = userArea.split("-");
+            if (areaArray.length == 3) {
+                $("#province").val(areaArray[0]);
+                $("#province").change();
+                $("#city").val(areaArray[1]);
+                $("#city").change();
+                $("#area").val(areaArray[2]);
+            }
+        }
+    }
+});

@@ -16,6 +16,7 @@ public class User implements Serializable{
     private String area;
     private String telPhone;
     private Role role;
+    private String zipCode;
 
     public int getId() {
         return id;
@@ -108,9 +109,17 @@ public class User implements Serializable{
     public User() {
     }
 
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
     @Override
     public String toString() {
         return "User [id=" + id + ", username=" + username + ", password=" + password + ", gender=" + gender + ", permission=" + permission + ", email=" + email + ", name=" + name
-                + ", address=" + address + ", area=" + area + ", telPhone=" + telPhone + ", role=" + role + "]";
+                + ", address=" + address + ", area=" + area + ", telPhone=" + telPhone + ", role=" + role + ", zipCode=" + zipCode + "]";
     }
 }

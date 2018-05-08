@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import top.yjzloveyzh.common.exception.UserException;
 import top.yjzloveyzh.common.pojo.User;
+import top.yjzloveyzh.common.utils.StringUtil;
 import top.yjzloveyzh.dao.LabUserDao;
 import top.yjzloveyzh.services.UserService;
 
@@ -48,4 +49,39 @@ public class UserServiceImpl implements UserService{
     public User getUserById(int id) {
         return labUserDao.findUserById(id);
     }
+
+    @Override
+    public int updateUser(int id, String gender, String name, String province, String city, String area, String cellphone, String zipCode, String address, String email) throws UserException {
+        User user = new User();
+
+        if (id <= 0) {
+            throw new UserException("该用户不存在");
+        }
+
+        String userArea = "";
+
+        if (province != null && city != null && area != null) {
+            userArea = province + "-" + city + "-" + area;
+        }
+
+        gender = StringUtil.setNullToEmpty(gender);
+        name = StringUtil.setNullToEmpty(name);
+        cellphone = StringUtil.setNullToEmpty(cellphone);
+        address = StringUtil.setNullToEmpty(address);
+        email = StringUtil.setNullToEmpty(email);
+
+        user.setId(id);
+        user.setAddress(address);
+        user.setArea(userArea);
+        user.setEmail(email);
+        user.setGender(gender);
+        user.setName(name);
+        user.setTelPhone(cellphone);
+        user.setZipCode(zipCode);
+
+        int editCount = labUserDao.editByUser(user);
+
+        return editCount;
+    }
+
 }

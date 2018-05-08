@@ -2,9 +2,10 @@ package top.yjzloveyzh.common;
 
 public class Constants {
 
-	public static class User {
-		public static final String SESSION_USER_KEY = "USER";
-	}
+    public static class User {
+        public static final String SESSION_USER_KEY = "USER";
+        public static final String USER_INFO = "userInfo";
+    }
 
     public static class UserControllerUrl {
         public static final String USER_CONTROLLER_URL_LOGIN = "login";

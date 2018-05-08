@@ -24,6 +24,12 @@
         ON permission.role_id = role.id
         WHERE USER.id = #{id} AND USER.is_deleted = 0
     </select>
+    
+    <update id="editByUser" parameterType="top.yjzloveyzh.common.pojo.User">
+      UPDATE user
+      SET gender = #{gender}, name = #{name}, area = #{area}, address = #{address}, tel_phone = #{telPhone}, zip_code = #{zipCode}, email = #{email}
+      WHERE id = #{id}
+    </update>
 
     <resultMap type="top.yjzloveyzh.common.pojo.User" id="user">
       <id column="id" property="id" />
@@ -35,6 +41,7 @@
       <result column="address" property="address" />
       <result column="area" property="area" />
       <result column="tel_phone" property="telPhone" />
+      <result column="zip_code" property="zipCode" />
       <association property="role" javaType="top.yjzloveyzh.common.pojo.Role" resultMap="role"></association>
     </resultMap>
 

@@ -8,6 +8,7 @@ public class Pagination<T> {
     int totalCount; // 总记录数
     int totalPage; // 总页数
     int currentPage;
+
     String searchKeyWord;
 
     public Pagination() {

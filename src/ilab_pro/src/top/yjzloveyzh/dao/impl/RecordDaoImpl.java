@@ -1,8 +1,9 @@
 package top.yjzloveyzh.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
-import top.yjzloveyzh.common.pojo.Pagination;
 import top.yjzloveyzh.common.pojo.RequestBuyRecord;
 import top.yjzloveyzh.dao.MySqlSessionDaoSupport;
 import top.yjzloveyzh.dao.RecordDao;
@@ -17,7 +18,14 @@ public class RecordDaoImpl extends MySqlSessionDaoSupport implements RecordDao {
     }
 
     @Override
-    public Pagination<RequestBuyRecord> getRequestRecordPagination(String keyword, int start, int offset, String orderBy) {
-        return null;
+    public List<RequestBuyRecord> getRequestBuyRecordPagination(String keyword, int start, int offset, String orderBy, int requestUserId) {
+
+        return getSqlSession().getMapper(RecordDao.class).getRequestBuyRecordPagination(keyword, start, offset, orderBy, requestUserId);
+    }
+
+    @Override
+    public int getRequestBuyRecordCount(String keyword, int requestUserId) {
+
+        return getSqlSession().getMapper(RecordDao.class).getRequestBuyRecordCount(keyword, requestUserId);
     }
 }

@@ -2,6 +2,10 @@ package top.yjzloveyzh.common;
 
 public class Constants {
 
+    public static class General {
+        public static final String PROPERTY_APP_FILE_NAME = "app.properties";
+    }
+
     public static class User {
         public static final String SESSION_USER_KEY = "USER";
         public static final String USER_INFO = "userInfo";
@@ -17,6 +21,10 @@ public class Constants {
         public static final String USER_CONTROLLER_URL_TO_LOGIN = "toLogin";
         public static final String USER_CONTROLLER_URL_REGISTER = "register";
         public static final String USER_CONTROLLER_LOGIN_PAGE_URL = "login/login";
+    }
+
+    public static class RecordController {
+        public static final String REQUEST_ATTRIBUTE_KEY_REQUEST_BUY_RECORD = "pagination";
     }
 
     public static class LabControllerUrl {
@@ -36,5 +44,10 @@ public class Constants {
     public static final class Code {
         public static final String BACK_CODE = "code";
         public static final String BACK_TIP = "tip";
+    }
+
+    public static final class Properties {
+        public static final String PROPERTIES_KEY_REQUEST_BUY_RECORD_PER_PAGE_COUNT = "request_buy_record_per_page_count";
+        public static final String PROPERTIES_KEY_PAGINATION_CHOOSE_LIST = "pagination_choose_list";
     }
 }

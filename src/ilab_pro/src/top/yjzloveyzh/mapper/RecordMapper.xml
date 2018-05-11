@@ -7,4 +7,51 @@
       VALUES(NOW(), NOW(), #{cost}, #{requestedUserId})
   </insert>
 
+  <select id="getRequestBuyRecordPagination" resultMap="request_buy_record">
+    SELECT record.id AS record_id,
+      record.created_at as record_created_at,
+      record.updated_at as record_updated_at,
+      record.is_deleted as record_is_deleted,
+      record.is_allowed as record_is_allowed,
+      record.is_done as record_is_done,
+      record.cost as record_cost,
+      record.allow_user_id,
+      record.request_user_id,
+      request_user.id as uid,
+      request_user.name as request_user_name
+    FROM request_buy_record record, user request_user
+    WHERE record.request_user_id = request_user.id
+    AND request_user.id = #{requestUserId}
+    AND request_user.name like #{keyword}
+    AND record.is_deleted = 0
+    ORDER BY record.created_at ${orderBy}
+    LIMIT #{start}, #{offset}
+  </select>
+
+  <select id="getRequestBuyRecordCount" resultType="int">
+    SELECT count(1)
+    FROM request_buy_record record, user request_user
+    WHERE record.request_user_id = request_user.id
+    AND request_user.id = #{requestUserId}
+    AND request_user.name like #{keyword}
+    AND record.is_deleted = 0
+  </select>
+
+  <resultMap type="top.yjzloveyzh.common.pojo.RequestBuyRecord" id="request_buy_record">
+    <id column="record_id" property="id" />
+    <result column="record_created_at" property="createAt" />
+    <result column="record_updated_at" property="updateAt" />
+    <result column="record_is_deleted" property="isDeleted" />
+    <result column="record_is_allowed" property="isAllowed" />
+    <result column="record_is_done" property="isDone" />
+    <result column="record_cost" property="cost" />
+    <result column="allow_user_id" property="allowedUserId" />
+    <result column="request_user_id" property="requestedUserId" />
+    <association property="requestedUser" resultMap="request_user"></association>
+  </resultMap>
+
+  <resultMap type="top.yjzloveyzh.common.pojo.User" id="request_user">
+    <id column="uid" property="id" />
+    <result column="request_user_name" property="name" />
+  </resultMap>
 </mapper>

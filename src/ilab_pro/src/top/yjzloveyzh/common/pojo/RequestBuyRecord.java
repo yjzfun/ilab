@@ -2,9 +2,15 @@ package top.yjzloveyzh.common.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class RequestBuyRecord {
     private int id;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createAt;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateAt;
     private boolean isDeleted;
     private boolean isAllowed;

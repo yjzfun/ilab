@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,7 +25,7 @@
 
   <body>
      <jsp:include page="../lab/header.jsp"></jsp:include>
-    
+
     <div class="content">
       <!-- 导航条 -->
       <ol class="breadcrumb">
@@ -60,7 +62,7 @@
                 <tr>
                   <th>#</th>
                   <th>创建时间</th>
-                  <th>花费</th>
+                  <th>花费(元)</th>
                   <th>申请人</th>
                   <th>是否审批</th>
                   <th>是否执行</th>
@@ -68,36 +70,22 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td><img src="<%= path %>/static/css/images/details.svg" class="detail-img" /></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>Thornton</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td><img src="<%= path %>/static/css/images/details.svg" class="detail-img" /></td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>the Bird</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                  <td><img src="<%= path %>/static/css/images/details.svg" class="detail-img" /></td>
-                </tr>
+                
+                <c:forEach items="${pagination.results }" var="record" varStatus="index">
+                  <tr>
+                    <th scope="row">${index.count }</th>
+                    <td><fmt:formatDate value="${record.createAt }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                    <td>${record.cost }</td>
+                    <td>${record.requestedUser.name }</td>
+                    <td>${record.allowed } </td>
+                    <td>${record.done }</td>
+                    <td><img src="<%= path %>/static/css/images/details.svg" class="detail-img" /></td>
+                  </tr>
+                </c:forEach>
+
               </tbody>
             </table>
-            
+
             <nav aria-label="Page navigation" class="pagination-nav text-center">
               <ul class="pagination">
                 <li>
@@ -105,11 +93,28 @@
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
+                <li>
+                  <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&lsaquo;</span>
+                  </a>
+                </li>
+                
+                <c:forEach items="${pagination.pagesList }" varStatus="i" var="pageIndex">
+                  <c:choose>
+                    <c:when test="${pageIndex eq pagination.currentPage}">
+                      <li class="active"><a href="#">${pageIndex }</a></li>
+                    </c:when>
+                    <c:otherwise>
+                      <li><a href="#">${pageIndex }</a></li>
+                    </c:otherwise>
+                  </c:choose>
+                </c:forEach>
+                
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&rsaquo;</span>
+                  </a>
+                </li>
                 <li>
                   <a href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>

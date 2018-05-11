@@ -14,7 +14,6 @@ public class LabUserDaoImpl extends MySqlSessionDaoSupport implements LabUserDao
     public long insertLabUser(User user) {
 
         getSqlSession().getMapper(LabUserDao.class).insertLabUser(user);
-
         return user.getId();
     }
 

@@ -1,6 +1,7 @@
  package top.yjzloveyzh.common.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable{
     private static final long serialVersionUID = -2361117940525101094L;
@@ -17,6 +18,8 @@ public class User implements Serializable{
     private String telPhone;
     private Role role;
     private String zipCode;
+    private Date updatedAt;
+    private Date createdAt;
 
     public int getId() {
         return id;
@@ -115,6 +118,22 @@ public class User implements Serializable{
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override

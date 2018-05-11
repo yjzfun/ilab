@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.yjzloveyzh.dao.EquipmentDao">
+
+  <insert id="insertRequestEquipment" parameterType="top.yjzloveyzh.common.pojo.RequestEquipment" 
+    keyProperty="id" useGeneratedKeys="true">
+    INSERT INTO buy_equipment(name, count, price, request_buy_record_id, lab_id, origin)
+    VALUES(#{name}, #{count}, #{price}, #{requestBuyRecordId}, #{labId}, #{origin})
+  </insert>
+
+
+  <resultMap type="top.yjzloveyzh.common.pojo.Equipment" id="equipment">
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="count" property="count" />
+    <result column="origin" property="origin" />
+    <result column="price" property="price" />
+    <result column="lab_id" property="labId" />
+    <result column="created_at" property="createdAt" />
+    <result column="updated_at" property="updatedAt" />
+    <result column="lab_id" property="isDeleted" />
+  </resultMap>
+
+  <resultMap type="top.yjzloveyzh.common.pojo.RequestEquipment" id="request_equipment">
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="count" property="count" />
+    <result column="price" property="price" />
+    <result column="request_buy_record_id" property="requestBuyRecordId" />
+    <result column="lab_id" property="labId" />
+    <result column="origin" property="origin" />
+  </resultMap>
+</mapper>

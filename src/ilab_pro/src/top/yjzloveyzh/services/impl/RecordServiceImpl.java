@@ -44,7 +44,7 @@ public class RecordServiceImpl implements RecordService{
             if (page <= 0) {
                 page = 1;
             }
-            count = Integer.parseInt(PropertyUtil.getRequestBuyRecordPerPageCount());
+
         } catch (NumberFormatException numberFormatException) {
         }
 
@@ -80,6 +80,70 @@ public class RecordServiceImpl implements RecordService{
         pagination.setTotalCount(count);
         pagination.setTotalPage(maxPage);
         pagination.setPagesList(pageIndexList);
+        pagination.setOrderBy(order);
+
+        return pagination;
+    }
+
+    @Override
+    public Pagination<RequestBuyRecord> getNotReplyRequestBuyRecord(User user, String keyword, String currentPage, String orderBy) throws RecordException {
+
+        if (user == null) {
+            throw new RecordException(Constants.ErrorCode.ERROR_USER_NOT_EXIST, "对不起, 请先登录.");
+        }
+
+        int page = 1;
+        int order = 1;
+        int count = 6;
+
+        if (keyword == null) {
+            keyword = new String();
+        }
+
+        try {
+            page = Integer.parseInt(currentPage);
+
+            if (page <= 0) {
+                page = 1;
+            }
+
+        } catch (NumberFormatException numberFormatException) {
+        }
+
+        try {
+            order = Integer.parseInt(orderBy);
+            order = order == 0 ? order : 1;
+        } catch (NumberFormatException e) {
+        }
+
+        try {
+            count = Integer.parseInt(PropertyUtil.getRequestBuyRecordPerPageCount());
+        } catch (NumberFormatException e) {
+        }
+
+
+        Pagination<RequestBuyRecord> pagination = new Pagination<RequestBuyRecord>();
+        pagination.setSearchKeyWord(keyword);
+        orderBy = order == 0 ? "ASC" : "DESC";
+
+        keyword = "%" + keyword + "%";
+        int totalCount = recordDao.getNotReplyAllRequestBuyRecordCount(keyword);
+        int start = (page - 1) * count;
+        int offset = count;
+        int maxPage = (int) Math.ceil(totalCount * 1.0 / count);
+
+        if (page > maxPage) {
+            page = maxPage;
+        }
+
+        List<Integer> pageIndexList = PaginationUtil.makePageIndexList(page, count, maxPage);
+
+        pagination.setCurrentPage(page);
+        pagination.setResults(recordDao.getNotReplyRequestBuyRecordPagination(keyword, start, offset, orderBy));
+        pagination.setTotalCount(count);
+        pagination.setTotalPage(maxPage);
+        pagination.setPagesList(pageIndexList);
+        pagination.setOrderBy(order);
 
         return pagination;
     }

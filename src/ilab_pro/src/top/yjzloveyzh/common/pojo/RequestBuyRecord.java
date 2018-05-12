@@ -1,6 +1,7 @@
 package top.yjzloveyzh.common.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,10 +17,12 @@ public class RequestBuyRecord {
     private boolean isAllowed;
     private boolean isDone;
     private double cost;
+    private String title;
     private int allowedUserId;
     private int requestedUserId;
     private User allowedUser;
     private User requestedUser;
+    private List<RequestEquipment> equipments;
 
     public RequestBuyRecord() {
     }
@@ -110,5 +113,21 @@ public class RequestBuyRecord {
 
     public void setRequestedUserId(int requestedUserId) {
         this.requestedUserId = requestedUserId;
+    }
+
+    public List<RequestEquipment> getEquipments() {
+        return equipments;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setEquipments(List<RequestEquipment> equipments) {
+        this.equipments = equipments;
     }
 }

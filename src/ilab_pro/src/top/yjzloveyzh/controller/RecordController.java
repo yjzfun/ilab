@@ -15,6 +15,7 @@ import top.yjzloveyzh.common.pojo.Pagination;
 import top.yjzloveyzh.common.pojo.RequestBuyRecord;
 import top.yjzloveyzh.common.pojo.User;
 import top.yjzloveyzh.services.RecordService;
+import top.yjzloveyzh.services.UserService;
 
 @Controller
 @RequestMapping(value = "/record")
@@ -23,6 +24,10 @@ public class RecordController {
     @Qualifier(value="recordServiceImpl")
     @Autowired
     RecordService recordService;
+
+    @Qualifier(value="userServiceImpl")
+    @Autowired
+    UserService userService;
 
     @RequestMapping("/buy-record")
     public String toBuyRecord(String searchKeyWord, String page, String orderBy, HttpSession session, HttpServletRequest request) {
@@ -45,10 +50,13 @@ public class RecordController {
     }
 
     @RequestMapping("/test")
-    public @ResponseBody Pagination<RequestBuyRecord> test(HttpSession session) throws RecordException {
+    public @ResponseBody Object test(HttpSession session) throws RecordException {
 
-        Pagination<RequestBuyRecord> pagination = recordService.getPaginationRequestBuyRecord((User)session.getAttribute(Constants.User.SESSION_USER_KEY), "", "1", "1");
+//        Pagination<RequestBuyRecord> pagination = recordService.getPaginationRequestBuyRecord((User)session.getAttribute(Constants.User.SESSION_USER_KEY), "", "1", "1");
 
-        return pagination;
+//        return pagination;
+        Pagination<RequestBuyRecord> notReplyRequestBuyRecord = recordService.getNotReplyRequestBuyRecord((User)session.getAttribute(Constants.User.SESSION_USER_KEY), "", "1", "1");
+        User user = (User) session.getAttribute(Constants.User.SESSION_USER_KEY);
+        return notReplyRequestBuyRecord;
     }
 }

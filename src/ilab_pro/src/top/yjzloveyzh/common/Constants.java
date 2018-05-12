@@ -50,4 +50,16 @@ public class Constants {
         public static final String PROPERTIES_KEY_REQUEST_BUY_RECORD_PER_PAGE_COUNT = "request_buy_record_per_page_count";
         public static final String PROPERTIES_KEY_PAGINATION_CHOOSE_LIST = "pagination_choose_list";
     }
+
+    public static final class LabServicePermission {
+
+    }
+
+    public static final class EquipmentServicePermission {
+
+    }
+
+    public static final class UserServicePermission {
+
+    }
 }

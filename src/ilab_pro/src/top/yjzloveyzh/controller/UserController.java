@@ -76,6 +76,9 @@ public class UserController {
 
         try {
             User user = userService.login(labUser);
+            user = userService.getUserById(user.getId());
+            user.setPassword("");
+
             session.setAttribute(Constants.User.SESSION_USER_KEY, user);
 
             return "redirect:/lab/toContent";

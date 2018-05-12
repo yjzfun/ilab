@@ -34,10 +34,13 @@ public class EquipmentServiceImpl implements EquipmentService{
             Constants.EquipmentController.KEY_REQUEST_BUY_EQUIPMENTS_JSON
         );
 
+        String title = (String) equipments.get("title");
+
         List<RequestEquipment> requestRequipments = new ArrayList<RequestEquipment>();
 
         RequestBuyRecord buyRecord = new RequestBuyRecord();
         buyRecord.setRequestedUser(user);
+        buyRecord.setTitle(title);
         double cost = 0;
 
         for(Map<String, String> equipment : equipmentList) {
@@ -55,7 +58,8 @@ public class EquipmentServiceImpl implements EquipmentService{
         buyRecord.setCost(cost);
         buyRecord.setRequestedUserId(user.getId());
 
-        int buyRecordId = recordDaoImpl.insertRequestRecordByRecord(buyRecord);
+        recordDaoImpl.insertRequestRecordByRecord(buyRecord);
+        int buyRecordId = buyRecord.getId();
 
         for (Map<String, String> equipment : equipmentList) {
             String name = equipment.get("name");

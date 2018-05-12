@@ -56,6 +56,20 @@
         </tr>
       </table>
 
+      <table align="center" class="bordered buy-equipment-table">
+        <tr>
+          <td colspan="2" bgcolor="#0ccff2" class="text-left"><label style="font-size: 18px">申请表信息</label></td>
+        </tr>
+        <tr>
+          <td bgcolor="#fff">
+            <label>申请简要(*)</label>
+          </td>
+          <td bgcolor="#fff" class="td-input">
+            <input type="text" class="input-text" id="title" value="" maxlength="20" placeholder="最长20个字符" />
+          </td>
+        </tr>
+      </table>
+
       <div class="equipment-table">
 
       </div>

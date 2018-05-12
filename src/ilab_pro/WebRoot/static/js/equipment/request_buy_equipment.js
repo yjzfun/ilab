@@ -65,43 +65,58 @@ $(document).ready(function(){
         equimentJson.equipments = [];
         let isFilledTrue = true;
 
-        for (let i = 0; i < equipmentNameElementes.length; i++) {
-            let equipment = {};
-            equipment.name = equipmentNameElementes[i].value;
-            equipment.count = equipmentCountElementes[i].value;
-            equipment.price = equipmentPriceElementes[i].value;
-            equipment.shop = equipmentShopAddressElementes[i].value;
-            equipment.lab = equipmentLabNameElementes[i].value;
-            equimentJson.equipments.push(equipment);
+        if (equipmentNameElementes.length == 0) {
+            $(".alert").attr("class", "alert alert-danger");
+            $(".alert").html("设备不得少于1个。");
+            isFilledTrue = false;
+        } else {
 
-            let countReg = /^\d+$/;
-            let priceReg = /^\d+(\.\d+)?$/;
+            for (let i = 0; i < equipmentNameElementes.length; i++) {
+                let equipment = {};
+                equipment.name = equipmentNameElementes[i].value;
+                equipment.count = equipmentCountElementes[i].value;
+                equipment.price = equipmentPriceElementes[i].value;
+                equipment.shop = equipmentShopAddressElementes[i].value;
+                equipment.lab = equipmentLabNameElementes[i].value;
+                equimentJson.equipments.push(equipment);
 
-            if (!equipment.name || !equipment.count || !equipment.price || !equipment.shop || !equipment.lab) {
-                $(".alert").attr("class", "alert alert-danger");
-                $(".alert").html("设备的各项信息不能为空。");
-                isFilledTrue = false;
+                let countReg = /^\d+$/;
+                let priceReg = /^\d+(\.\d+)?$/;
 
-                break;
-            } else if (!countReg.test(equipment.count)){
-                $(".alert").attr("class", "alert alert-danger");
-                $(".alert").html("设备的数量需为整数。");
+                if (!equipment.name || !equipment.count || !equipment.price || !equipment.shop || !equipment.lab) {
+                    $(".alert").attr("class", "alert alert-danger");
+                    $(".alert").html("设备的各项信息不能为空。");
+                    isFilledTrue = false;
 
-                isFilledTrue = false;
-                break;
-            } else if (!priceReg.test(equipment.price)) {
-                $(".alert").attr("class", "alert alert-danger");
-                $(".alert").html("设备的价格需为正整数或浮点数。");
-                isFilledTrue = false;
+                    break;
+                } else if (!countReg.test(equipment.count)){
+                    $(".alert").attr("class", "alert alert-danger");
+                    $(".alert").html("设备的数量需为整数。");
 
-                break;
-            } else if (equipment.count <= 0) {
-                $(".alert").attr("class", "alert alert-danger");
-                $(".alert").html("设备的数量最少为1。");
-                isFilledTrue = false;
+                    isFilledTrue = false;
+                    break;
+                } else if (!priceReg.test(equipment.price)) {
+                    $(".alert").attr("class", "alert alert-danger");
+                    $(".alert").html("设备的价格需为正整数或浮点数。");
+                    isFilledTrue = false;
 
-                break;
+                    break;
+                } else if (equipment.count <= 0) {
+                    $(".alert").attr("class", "alert alert-danger");
+                    $(".alert").html("设备的数量最少为1。");
+                    isFilledTrue = false;
+
+                    break;
+                }
             }
+        }
+
+        if ($("#title").val() && $.trim($("#title").val())) {
+            equimentJson.title = $("#title").val();
+        } else {
+            $(".alert").attr("class", "alert alert-danger");
+            $(".alert").html("申请简要不能为空。");
+            isFilledTrue = false;
         }
 
         if (isFilledTrue) {

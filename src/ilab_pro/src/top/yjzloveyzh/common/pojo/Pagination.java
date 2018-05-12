@@ -3,11 +3,12 @@ package top.yjzloveyzh.common.pojo;
 import java.util.List;
 
 public class Pagination<T> {
-    List<T> results;
-    List<Integer> pagesList;
-    int totalCount; // 总记录数
-    int totalPage; // 总页数
-    int currentPage;
+    private List<T> results;
+    private List<Integer> pagesList;
+    private int totalCount; // 总记录数
+    private int totalPage; // 总页数
+    private int currentPage;
+    private int orderBy;
 
     String searchKeyWord;
 
@@ -61,5 +62,13 @@ public class Pagination<T> {
 
     public void setSearchKeyWord(String searchKeyWord) {
         this.searchKeyWord = searchKeyWord;
+    }
+
+    public int getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(int orderBy) {
+        this.orderBy = orderBy;
     }
 }

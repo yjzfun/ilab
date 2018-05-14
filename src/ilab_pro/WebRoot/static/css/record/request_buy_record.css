@@ -124,4 +124,25 @@
 .detail-img {
   width: 16px;
   height: 16px;
+  cursor: pointer;
+}
+
+.modal .title-b {
+  width: 4px;
+  height: 16px;
+  background-color: #00a1d6;
+  border-radius: 4px;
+  margin-top: 4px;
+  margin-right: 15px;
+}
+
+.modal .modal-title {
+  margin: 15px 0 0 5px;
+  color: #00a1d6;
+  font-size: 18px;
+  cursor: default;
+}
+
+table {
+  width: 100%;
 }

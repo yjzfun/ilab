@@ -8,4 +8,12 @@ $(document).ready(function() {
             $("#searchForm").submit();
         }
     });
+
+    $(".record-buy-record").on("click", function() {
+        $(location).attr('href', path + '/approvement/r/buy-record');
+    });
+
+    $(".approve-buy-record").on("click", function() {
+        $(location).attr('href', path + '/approvement/m/buy-record');
+    });
 });

@@ -41,4 +41,34 @@ public class RecordDaoImpl extends MySqlSessionDaoSupport implements RecordDao {
         return getSqlSession().getMapper(RecordDao.class).getNotReplyAllRequestBuyRecordCount(keyword);
     }
 
+    @Override
+    public int getRepliedRequestBuyRecordCount(String keyword) {
+
+        return getSqlSession().getMapper(RecordDao.class).getRepliedRequestBuyRecordCount(keyword);
+    }
+
+    @Override
+    public RequestBuyRecord findRequestBuyRecordById(int id) {
+
+        return getSqlSession().getMapper(RecordDao.class).findRequestBuyRecordById(id);
+    }
+
+    @Override
+    public int updateRequestBuyRecordAllowedById(int id, int opearation, int allowUserId) {
+
+        return getSqlSession().getMapper(RecordDao.class).updateRequestBuyRecordAllowedById(id, opearation, allowUserId);
+    }
+
+    @Override
+    public List<RequestBuyRecord> getRepliedRequestBuyRecordPagination(String keyword, int start, int offset, String orderBy) {
+
+        return getSqlSession().getMapper(RecordDao.class).getRepliedRequestBuyRecordPagination(keyword, start, offset, orderBy);
+    }
+
+    @Override
+    public RequestBuyRecord findRepliedBuyRecordById(int id) {
+
+        return getSqlSession().getMapper(RecordDao.class).findRepliedBuyRecordById(id);
+    }
+
 }

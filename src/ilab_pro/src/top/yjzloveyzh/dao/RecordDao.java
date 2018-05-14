@@ -40,4 +40,29 @@ public interface RecordDao {
      * @return the request-buy-record count
      */
     public int getNotReplyAllRequestBuyRecordCount(@Param("keyword") String keyword);
+
+    public RequestBuyRecord findRequestBuyRecordById(int id);
+
+    public RequestBuyRecord findRepliedBuyRecordById(int id);
+
+    /**
+     * 审批申请购置的表
+     * @param id 表的Id
+     * @param opearation 参数 0: 进行中, 1: 审批, -1: 拒绝
+     * @return 修改记录条数
+     */
+    public int updateRequestBuyRecordAllowedById(@Param("recordId")int id, @Param("operation")int operation, @Param("allow_user_id") int allowUserId);
+
+    /**
+     * @param keyword
+     * @return
+     */
+    int getRepliedRequestBuyRecordCount(String keyword);
+
+    public List<RequestBuyRecord> getRepliedRequestBuyRecordPagination(
+        @Param("keyword") String keyword,
+        @Param("start") int start,
+        @Param("offset") int offset,
+        @Param("orderBy") String orderBy
+    );
 }

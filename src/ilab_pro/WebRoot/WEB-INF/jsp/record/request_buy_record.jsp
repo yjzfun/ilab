@@ -82,7 +82,7 @@
                     <td><fmt:formatDate value="${record.createAt }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                     <td>${record.cost }</td>
                     <td>${record.requestedUser.name }</td>
-                    <td>${record.allowed } </td>
+                    <td>${record.isAllowed } </td>
                     <td>${record.done }</td>
                     <td><img src="<%= path %>/static/css/images/details.svg" class="detail-img" /></td>
                   </tr>

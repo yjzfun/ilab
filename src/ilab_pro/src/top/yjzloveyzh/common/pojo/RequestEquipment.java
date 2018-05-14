@@ -8,7 +8,7 @@ public class RequestEquipment {
     int labId;
     String origin;
     int requestBuyRecordId;
-
+    Lab lab;
 
     public RequestEquipment() {
     }
@@ -67,5 +67,13 @@ public class RequestEquipment {
 
     public void setRequestBuyRecordId(int requestBuyRecordId) {
         this.requestBuyRecordId = requestBuyRecordId;
+    }
+
+    public Lab getLab() {
+        return lab;
+    }
+
+    public void setLab(Lab lab) {
+        this.lab = lab;
     }
 }

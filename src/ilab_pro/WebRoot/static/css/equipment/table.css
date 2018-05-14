@@ -24,12 +24,12 @@ table {
     -ms-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;     
 }    
-    
+
 .bordered td, .bordered th {
     border-left: 1px solid #ccc;
     border-top: 1px solid #ccc;
     padding: 10px;
-    text-align: center;    
+    text-align: left;
 }
 
 .bordered th {
@@ -52,6 +52,9 @@ table {
     border-left: none;
 }
 
+.bordered td:last-child {
+}
+
 .bordered th:first-child {
     -moz-border-radius: 6px 0 0 0;
     -webkit-border-radius: 6px 0 0 0;
@@ -62,7 +65,6 @@ table {
     -moz-border-radius: 0 6px 0 0;
     -webkit-border-radius: 0 6px 0 0;
     border-radius: 0 6px 0 0;
-    
 }
 
 .bordered th:only-child{

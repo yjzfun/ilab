@@ -19,4 +19,28 @@ public interface RecordService {
         String currentPage,
         String orderBy
     ) throws RecordException;
+
+    public RequestBuyRecord findRequestBuyRecordById(String id) throws RecordException;
+
+    public RequestBuyRecord findRepliedBuyRecordById(String id) throws RecordException;
+
+    /**
+     * @param id
+     * @param operation
+     * @param user
+     * @return
+     * @throws RecordException
+     */
+    int approveRequestBuyRecord(String id, String operation, User user) throws RecordException;
+
+    /**
+     * 获取已经答复了的购置记录
+     * @param user
+     * @param keyword
+     * @param currentPage
+     * @param orderBy
+     * @return
+     * @throws RecordException
+     */
+    Pagination<RequestBuyRecord> getRepliedRequestBuyRecord(User user, String keyword, String currentPage, String orderBy) throws RecordException;
 }

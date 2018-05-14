@@ -76,7 +76,7 @@
               <li><a href="#">入库记录</a></li>
             </ul>
           </li>
-          <li><a href="<%= path %>/approvement/buy-record">审批管理 </a></li>
+          <li><a href="<%= path %>/approvement/m/buy-record">审批管理 </a></li>
         </ul>
   
         <div class="navbar-form navbar-right">

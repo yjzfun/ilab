@@ -3,18 +3,14 @@ package top.yjzloveyzh.common.pojo;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class RequestBuyRecord {
+
     private int id;
-
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createAt;
-
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateAt;
+    private Date allowAt;
     private boolean isDeleted;
-    private boolean isAllowed;
+    private int isAllowed;
     private boolean isDone;
     private double cost;
     private String title;
@@ -63,10 +59,6 @@ public class RequestBuyRecord {
         return isDeleted;
     }
 
-    public boolean isAllowed() {
-        return isAllowed;
-    }
-
     public boolean isDone() {
         return isDone;
     }
@@ -75,7 +67,11 @@ public class RequestBuyRecord {
         this.isDeleted = isDeleted;
     }
 
-    public void setAllowed(boolean isAllowed) {
+    public int getIsAllowed() {
+        return isAllowed;
+    }
+
+    public void setIsAllowed(int isAllowed) {
         this.isAllowed = isAllowed;
     }
 
@@ -129,5 +125,13 @@ public class RequestBuyRecord {
 
     public void setEquipments(List<RequestEquipment> equipments) {
         this.equipments = equipments;
+    }
+
+    public Date getAllowAt() {
+        return allowAt;
+    }
+
+    public void setAllowAt(Date allowAt) {
+        this.allowAt = allowAt;
     }
 }

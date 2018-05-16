@@ -54,6 +54,7 @@
   color: #99a2aa;
   cursor: default;
   border-bottom: 1px solid #e1e2e5;
+  background-color: #eaeaea;
 }
 
 .record-content .record-left .record-left-ul {
@@ -127,6 +128,12 @@
   cursor: pointer;
 }
 
+.delete-img {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
 .modal .title-b {
   width: 4px;
   height: 16px;
@@ -141,6 +148,10 @@
   color: #00a1d6;
   font-size: 18px;
   cursor: default;
+}
+
+.record-left-ul {
+  margin-bottom: 0px;
 }
 
 table {

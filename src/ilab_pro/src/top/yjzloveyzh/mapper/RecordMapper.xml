@@ -259,7 +259,7 @@
     <association property="lab" resultMap="lab"></association>
   </resultMap>
 
-   <resultMap type="top.yjzloveyzh.common.pojo.Lab" id="lab">
+  <resultMap type="top.yjzloveyzh.common.pojo.Lab" id="lab">
     <id column="lab_id" property="id" />
     <result column="lab_name" property="name" />
   </resultMap>

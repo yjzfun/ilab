@@ -38,13 +38,11 @@
           <span class="record-left-title">审批管理</span>
           <ul class="record-left-ul">
             <li class="li-list on approve-buy-record"><span>购置审批</span></li>
-            <li class="li-list "><span>报废审批</span></li>
           </ul>
 
           <span class="record-left-title">审批记录</span>
           <ul class="record-left-ul">
             <li class="li-list record-buy-record"><span>购置</span></li>
-            <li class="li-list"><span>报废</span></li>
           </ul>
         </div>
         
@@ -75,7 +73,7 @@
                   <th>申请人</th>
                   <th>申请日期</th>
                   <th>详情</th>
-                  <th>操作</th>
+<!--                   <th>操作</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -93,7 +91,7 @@
                         <img src="<%= path %>/static/css/images/details.svg" class="detail-img" />
                       </a>
                     </td>
-                    <td><img src="<%= path %>/static/css/images/operation.svg" class="detail-img" /></td>
+<%--                     <td><img src="<%= path %>/static/css/images/operation.svg" class="detail-img" /></td> --%>
                   </tr>
                 </c:forEach>
 

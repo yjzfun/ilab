@@ -17,3 +17,11 @@ $(document).ready(function() {
         $(location).attr('href', path + '/approvement/m/buy-record');
     });
 });
+
+function toDeletedRecord() {
+    document.location.href = path + "/record/delete-record";
+}
+
+function toBuyRecord() {
+    document.location.href = path + "/record/buy-record";
+}

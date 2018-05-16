@@ -42,15 +42,15 @@
         <div class="record-left">
           <span class="record-left-title">记录查询</span>
           <ul class="record-left-ul">
-            <li class="li-list on"><span>购置记录</span></li>
-            <li class="li-list" onclick="toDeletedRecord()"><span>删除记录</span></li>
+            <li class="li-list" onclick="toBuyRecord()"><span>购置记录</span></li>
+            <li class="li-list on"><span>删除记录</span></li>
           </ul>
         </div>
         <div class="record-right">
           <div class="record-right-title">
             <span class="title-b pull-left"></span>
             <span class="title-content pull-left">记录</span>
-            <form action="<%= path %>/record/buy-record" method="get" id="searchForm">
+            <form action="<%= path %>/record/delete-record" method="get" id="searchForm">
               <input class="hidden" type="text" value="${pagination.currentPage }" name="page" />
               <input class="hidden" type="text" value="${pagination.orderBy }" name="orderBy" />
               <div class="input-group search-input">
@@ -68,11 +68,10 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>申请时间</th>
-                  <th>花费(元)</th>
-                  <th>申请人</th>
-                  <th>是否审批</th>
-                  <th>是否执行</th>
+                  <th>id</th>
+                  <th>删除时间</th>
+                  <th>工号</th>
+                  <th>姓名</th>
                   <th>详情</th>
                 </tr>
               </thead>
@@ -81,11 +80,10 @@
                 <c:forEach items="${pagination.results }" var="record" varStatus="index">
                   <tr>
                     <th scope="row">${index.count }</th>
-                    <td><fmt:formatDate value="${record.createAt }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                    <td>${record.cost }</td>
-                    <td>${record.requestedUser.name }</td>
-                    <td>${record.isAllowed } </td>
-                    <td>${record.done }</td>
+                    <td>${record.id }</td>
+                    <td><fmt:formatDate value="${record.createdAt }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                    <td>${record.user.id }</td>
+                    <td>${record.user.name }</td>
                     <td><img src="<%= path %>/static/css/images/details.svg" class="detail-img" /></td>
                   </tr>
                 </c:forEach>

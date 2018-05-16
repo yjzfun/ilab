@@ -6,5 +6,6 @@
     <mapper resource="top/yjzloveyzh/mapper/UserMapper.xml" />
     <mapper resource="top/yjzloveyzh/mapper/EquipmentMapper.xml" />
     <mapper resource="top/yjzloveyzh/mapper/RecordMapper.xml" />
+    <mapper resource="top/yjzloveyzh/mapper/DeleteRecordMappper.xml" />
   </mappers>
 </configuration>

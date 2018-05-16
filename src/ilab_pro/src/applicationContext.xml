@@ -41,10 +41,14 @@
       <tx:attributes>
         <tx:method name="request*" propagation="REQUIRED" isolation="DEFAULT" />
         <tx:method name="insert*" propagation="REQUIRED" isolation="DEFAULT" />
+        <tx:method name="approve*" propagation="REQUIRED" isolation="DEFAULT" />
+        <tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT" />
       </tx:attributes>
     </tx:advice>
     
     <aop:config>
       <aop:advisor advice-ref="equipmentAdvice" pointcut="execution(* top.yjzloveyzh.services.impl.EquipmentServiceImpl.requestBuyEquipment(..))" />
+      <aop:advisor advice-ref="equipmentAdvice" pointcut="execution(* top.yjzloveyzh.services.impl.RecordServiceImpl.approveRequestBuyRecord(..))" />
+      <aop:advisor advice-ref="equipmentAdvice" pointcut="execution(* top.yjzloveyzh.dao.impl.EquipmentDaoImpl.deleteEquipmentByIdArray(..))" />
     </aop:config>
 </beans>

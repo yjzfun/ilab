@@ -28,11 +28,20 @@ public class UserController {
     UserService userService;
 
     @RequestMapping("/toLogin")
-    public String toLogin(RedirectAttributes redirectAttributes, HttpSession session) {
+    public String toLogin(RedirectAttributes redirectAttributes, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
         if (session.getAttribute(Constants.User.SESSION_USER_KEY) != null) {
 
             return "redirect:/lab/toContent";
+        } else {
+            User user = userService.loginByCookie(request, response);
+
+            if (user != null) {
+                user.setPassword("");
+                session.setAttribute(Constants.User.SESSION_USER_KEY, user);
+
+                return "redirect:/lab/toContent";
+            }
         }
 
         return Constants.UserControllerUrl.USER_CONTROLLER_LOGIN_PAGE_URL;
@@ -71,14 +80,13 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public String login(User labUser, HttpSession session, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+    public String login(User labUser, String rememberMe, HttpSession session, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         String errorMessage = "";
 
         try {
-            User user = userService.login(labUser);
+            User user = userService.login(labUser, rememberMe, response);
             user = userService.getUserById(user.getId());
             user.setPassword("");
-
             session.setAttribute(Constants.User.SESSION_USER_KEY, user);
 
             return "redirect:/lab/toContent";
@@ -106,11 +114,11 @@ public class UserController {
     }
 
     @RequestMapping(value="/logout")
-    public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
+    public String logout(HttpSession session, RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
         User user = (User) session.getAttribute(Constants.User.SESSION_USER_KEY);
 
         if (user != null) {
-            session.setAttribute(Constants.User.SESSION_USER_KEY, null);
+            userService.logout(session, request, response);
             redirectAttributes.addFlashAttribute("error", "登出成功。");
 
             return "redirect:/user/toLogin";

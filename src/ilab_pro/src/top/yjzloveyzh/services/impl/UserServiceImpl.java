@@ -1,11 +1,20 @@
 package top.yjzloveyzh.services.impl;
 
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import top.yjzloveyzh.common.Constants;
 import top.yjzloveyzh.common.exception.UserException;
 import top.yjzloveyzh.common.pojo.User;
+import top.yjzloveyzh.common.utils.CookieUtil;
+import top.yjzloveyzh.common.utils.MD5Util;
 import top.yjzloveyzh.common.utils.StringUtil;
 import top.yjzloveyzh.dao.LabUserDao;
 import top.yjzloveyzh.services.UserService;
@@ -18,13 +27,23 @@ public class UserServiceImpl implements UserService{
     LabUserDao labUserDao;
 
     @Override
-    public User login(User user) throws UserException {
+    public User login(User user, String remmemberMe, HttpServletResponse response) throws UserException {
         User userByDao = labUserDao.findUserByUserName(user.getUsername());
 
         if (userByDao != null) {
             if (!userByDao.getPassword().equals(user.getPassword())) {
                 throw new UserException("用户名或密码错误, 请重新输入.");
             } else {
+
+                if (remmemberMe != null && remmemberMe.equals("1")) {
+                    String token = MD5Util.md5(new Date().toString() + userByDao.getUsername());
+
+                    if (labUserDao.updateUserToken(userByDao.getId(), token) == 1) {
+                        CookieUtil.addCookie(response, Constants.Cookie.COOKIE_KEY_REMEMBER_ME, "1");
+                        CookieUtil.addCookie(response, Constants.Cookie.COOKIE_KEY_TOKEN, token);
+                        CookieUtil.addCookie(response, Constants.Cookie.COOKIE_KEY_USERNAME, userByDao.getUsername());
+                    }
+                }
                 user.setPassword("");
 
                 return userByDao;
@@ -32,6 +51,30 @@ public class UserServiceImpl implements UserService{
         } else {
             throw new UserException("用户名或密码错误, 请重新输入.");
         }
+    }
+
+    @Override
+    public User loginByCookie(HttpServletRequest request, HttpServletResponse response) {
+
+        String rememberMe = CookieUtil.getCookie(request, Constants.Cookie.COOKIE_KEY_REMEMBER_ME);
+        User user = null;
+
+        if (rememberMe != null && rememberMe.equals("1")) {
+            String username = CookieUtil.getCookie(request, Constants.Cookie.COOKIE_KEY_USERNAME);
+
+            if (StringUtil.isNotEmpty(username)) {
+                user = labUserDao.findUserByUserName(username);
+            }
+
+            String token = CookieUtil.getCookie(request, Constants.Cookie.COOKIE_KEY_TOKEN);
+
+            if (StringUtil.isNotEmpty(user.getToken()) && user.getToken().equals(token)) {
+
+                return user;
+            }
+        }
+
+        return null;
     }
 
     @Override
@@ -82,6 +125,16 @@ public class UserServiceImpl implements UserService{
         int editCount = labUserDao.editByUser(user);
 
         return editCount;
+    }
+
+    @Override
+    public void logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+        CookieUtil.removeCookie(response, "rememberMe");
+        CookieUtil.removeCookie(response, "username");
+        CookieUtil.removeCookie(response, "token");
+
+        session.removeAttribute(Constants.User.SESSION_USER_KEY);
     }
 
 }

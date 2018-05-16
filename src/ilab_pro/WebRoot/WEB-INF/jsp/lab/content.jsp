@@ -133,13 +133,13 @@
               <label><a href="<%= path %>/user/toUserInfo">个人信息管理</a></label>
             </div>
             <div class="ywcl-btn">
-              <label>实验设备查询</label>
+              <label><a href="<%= path %>/equipment/list">实验设备查询</a></label>
             </div>
             <div class="ywcl-btn userinfo">
               <label><a href="<%= path %>/equipment/toRequestBuyEquip">购置设备申请</a></label>
             </div>
             <div class="ywcl-btn">
-              <label>报废设备申请</label>
+              <label><a href="<%= path %>/lab/info?labId=1">设备盘点管理</a></label>
             </div>
           </div>
         </div>

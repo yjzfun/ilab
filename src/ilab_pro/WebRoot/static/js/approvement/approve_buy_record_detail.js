@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     $('.agree-btn').on('click', function () {
         $.ajax({
-            url: path + "/approvement/buy-record/approve",
+            url: path + "/approvement/m/buy-record/approve",
             type: "post",
             data: {
                 id: $('.record-id').val().toString(),

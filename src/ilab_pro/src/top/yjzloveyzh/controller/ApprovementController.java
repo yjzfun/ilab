@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import top.yjzloveyzh.common.Constants;
+import top.yjzloveyzh.common.exception.EquipmentException;
 import top.yjzloveyzh.common.exception.RecordException;
 import top.yjzloveyzh.common.pojo.Pagination;
 import top.yjzloveyzh.common.pojo.RequestBuyRecord;
@@ -103,6 +104,8 @@ public class ApprovementController {
             result.put("code", Constants.ErrorCode.SUCCESS);
         } catch (RecordException recordException) {
             result.put("code", recordException.getErrorCode());
+        } catch (EquipmentException equipmentException) {
+            result.put("code", equipmentException.getErrorCode());
         }
 
         return result;

@@ -70,5 +70,4 @@ public class RecordDaoImpl extends MySqlSessionDaoSupport implements RecordDao {
 
         return getSqlSession().getMapper(RecordDao.class).findRepliedBuyRecordById(id);
     }
-
 }

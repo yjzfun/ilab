@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import top.yjzloveyzh.common.Constants;
+import top.yjzloveyzh.common.exception.EquipmentException;
 import top.yjzloveyzh.common.exception.RecordException;
+import top.yjzloveyzh.common.pojo.Equipment;
 import top.yjzloveyzh.common.pojo.Pagination;
 import top.yjzloveyzh.common.pojo.RequestBuyRecord;
+import top.yjzloveyzh.common.pojo.RequestEquipment;
 import top.yjzloveyzh.common.pojo.User;
 import top.yjzloveyzh.common.utils.PaginationUtil;
 import top.yjzloveyzh.common.utils.PropertyUtil;
 import top.yjzloveyzh.dao.RecordDao;
+import top.yjzloveyzh.services.EquipmentService;
 import top.yjzloveyzh.services.RecordService;
 
 @Service(value = "recordServiceImpl")
@@ -22,6 +26,10 @@ public class RecordServiceImpl implements RecordService{
     @Qualifier(value = "recordDaoImpl")
     @Autowired
     private RecordDao recordDao;
+
+    @Qualifier(value = "equipmentServiceImpl")
+    @Autowired
+    private EquipmentService equipmentService;
 
     @Override
     public Pagination<RequestBuyRecord> getPaginationRequestBuyRecord(User user, String keyword, String currentPage, String orderBy) throws RecordException {
@@ -71,7 +79,7 @@ public class RecordServiceImpl implements RecordService{
         int maxPage = (int) Math.ceil(totalCount * 1.0 / count);
 
         if (page > maxPage) {
-            page = maxPage;
+            page = 1;
         }
         List<Integer> pageIndexList = PaginationUtil.makePageIndexList(page, count, maxPage);
 
@@ -133,7 +141,7 @@ public class RecordServiceImpl implements RecordService{
         int maxPage = (int) Math.ceil(totalCount * 1.0 / count);
 
         if (page > maxPage) {
-            page = maxPage;
+            page = 1;
         }
 
         List<Integer> pageIndexList = PaginationUtil.makePageIndexList(page, count, maxPage);
@@ -196,7 +204,7 @@ public class RecordServiceImpl implements RecordService{
         int maxPage = (int) Math.ceil(totalCount * 1.0 / count);
 
         if (page > maxPage) {
-            page = maxPage;
+            page = 1;
         }
 
         List<Integer> pageIndexList = PaginationUtil.makePageIndexList(page, count, maxPage);
@@ -229,7 +237,7 @@ public class RecordServiceImpl implements RecordService{
     }
 
     @Override
-    public int approveRequestBuyRecord(String id, String operation, User user) throws RecordException {
+    public int approveRequestBuyRecord(String id, String operation, User user) throws RecordException, EquipmentException {
 
         int recordId = -1;
         int recordOperation = -2;
@@ -251,6 +259,22 @@ public class RecordServiceImpl implements RecordService{
         }
 
         int operationCount = recordDao.updateRequestBuyRecordAllowedById(recordId, recordOperation, user.getId());
+
+        RequestBuyRecord requestBuyRecord = recordDao.findRepliedBuyRecordById(recordId);
+
+        List<RequestEquipment> equipments = requestBuyRecord.getEquipments();
+
+        for (RequestEquipment requestEquipment : equipments) {
+            for (int i = 0; i < requestEquipment.getCount(); i++) {
+                Equipment equipment = new Equipment();
+                equipment.setName(requestEquipment.getName());
+                equipment.setLabId(requestEquipment.getLabId());
+                equipment.setOrigin(requestEquipment.getOrigin());
+                equipment.setPrice(requestEquipment.getPrice());
+                equipment.setRequestBuyRecordId(requestEquipment.getRequestBuyRecordId());
+                equipmentService.insertEquipmentByEquipment(equipment, user);
+            }
+        }
 
         if (operationCount == 0) {
             throw new RecordException(Constants.ErrorCode.ERROR_RESOURCE_NOT_FOUND, "找不到对应的记录");

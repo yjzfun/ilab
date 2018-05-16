@@ -1,6 +1,7 @@
 package top.yjzloveyzh.common.pojo;
 
 import java.util.List;
+import java.util.Map;
 
 public class Pagination<T> {
     private List<T> results;
@@ -9,6 +10,7 @@ public class Pagination<T> {
     private int totalPage; // 总页数
     private int currentPage;
     private int orderBy;
+    private Map<String, Object> extra;
 
     String searchKeyWord;
 
@@ -70,5 +72,13 @@ public class Pagination<T> {
 
     public void setOrderBy(int orderBy) {
         this.orderBy = orderBy;
+    }
+
+    public Map<String, Object> getExtra() {
+        return extra;
+    }
+
+    public void setExtra(Map<String, Object> extra) {
+        this.extra = extra;
     }
 }

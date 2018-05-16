@@ -11,6 +11,13 @@ public class Constants {
         public static final String USER_INFO = "userInfo";
     }
 
+    public static class Cookie {
+        public static final String COOKIE_KEY_REMEMBER_ME = "rememberMe";
+        public static final String COOKIE_KEY_TOKEN = "token";
+        public static final String COOKIE_KEY_USERNAME = "username";
+        public static final int COOKIE_TIME_EXIST = 60 * 60 * 24 * 10;
+    }
+
     public static class EquipmentController {
         public static final String KEY_REQUEST_BUY_EQUIPMENTS_JSON = "equipments";
         public static final String KEY_LABS= "labs";

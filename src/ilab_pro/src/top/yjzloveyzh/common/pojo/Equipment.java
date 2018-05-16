@@ -5,13 +5,15 @@ import java.util.Date;
 public class Equipment {
     int id;
     String name;
-    int count;
     double price;
     int labId;
     String origin;
     Date createdAt;
     Date updatedAt;
+    int requestBuyRecordId;
+
     boolean isDeleted;
+    Lab lab;
 
     public Equipment() {
     }
@@ -22,10 +24,6 @@ public class Equipment {
 
     public String getName() {
         return name;
-    }
-
-    public int getCount() {
-        return count;
     }
 
     public double getPrice() {
@@ -46,10 +44,6 @@ public class Equipment {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 
     public void setPrice(double price) {
@@ -86,5 +80,21 @@ public class Equipment {
 
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public Lab getLab() {
+        return lab;
+    }
+
+    public void setLab(Lab lab) {
+        this.lab = lab;
+    }
+
+    public int getRequestBuyRecordId() {
+        return requestBuyRecordId;
+    }
+
+    public void setRequestBuyRecordId(int requestBuyRecordId) {
+        this.requestBuyRecordId = requestBuyRecordId;
     }
 }

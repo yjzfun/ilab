@@ -38,13 +38,11 @@
           <span class="record-left-title">审批管理</span>
           <ul class="record-left-ul">
             <li class="li-list approve-buy-record"><span>购置审批</span></li>
-            <li class="li-list"><span>报废审批</span></li>
           </ul>
 
           <span class="record-left-title">审批记录</span>
           <ul class="record-left-ul">
             <li class="li-list on record-buy-record"><span>购置</span></li>
-            <li class="li-list"><span>报废</span></li>
           </ul>
         </div>
 

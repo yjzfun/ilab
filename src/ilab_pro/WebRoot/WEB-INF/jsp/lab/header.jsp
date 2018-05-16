@@ -47,34 +47,10 @@
       <div class="collapse navbar-collapse"
         id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left">
-          <li class="active" style="padding-left: 80px;">
+          <li style="padding-left: 80px;">
             <a href="<%= path %>/lab/toContent">首页</a>
           </li>
-          <li><a href="#">盘点管理</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                aria-expanded="false">出入库管理
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle"
-            data-toggle="dropdown" role="button" aria-haspopup="true"
-            aria-expanded="false">记录查询 <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="<%= path %>/record/buy-record">购置记录</a></li>
-              <li><a href="#">维修记录</a></li>
-              <li><a href="#">报废记录</a></li>
-              <li><a href="#">入库记录</a></li>
-            </ul>
+          <li><a href="<%= path %>/record/buy-record">记录查询 </a>
           </li>
           <li><a href="<%= path %>/approvement/m/buy-record">审批管理 </a></li>
         </ul>
@@ -85,7 +61,7 @@
               <a class="btn btn-danger" type="button" href="<%= path %>/user/logout">退出</a>
             </c:when>
             <c:otherwise>
-              <button class="btn btn-success" type="button">登录</button>
+              <a class="btn btn-success" type="button" href="<%= path %>/user/toLogin">登录</a>
             </c:otherwise>
           </c:choose>
         </div>

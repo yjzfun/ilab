@@ -79,7 +79,7 @@
               </div>
               <div class="login-rememRule">
                 <label class="rememberUserPassword"> 
-                  <input name="flag" type="checkbox" />&nbsp;记住密码
+                  <input name="rememberMe" type="checkbox" value="1" checked="checked" />&nbsp;记住密码
                 </label> 
                 <span class="user-operation"> 
                   <a data-toggle="modal" data-dismiss="modal" data-target="#register">注册</a>

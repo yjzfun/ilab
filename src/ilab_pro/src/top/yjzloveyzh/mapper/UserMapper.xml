@@ -10,9 +10,14 @@
   </insert>
 
   <select id="findUserByUserName" parameterType="String"
-      resultType="top.yjzloveyzh.common.pojo.User">
-      SELECT * FROM user
-      WHERE username = #{v} and is_deleted = 0
+      resultMap="user">
+      SELECT user.*, role.id as role_id, role.name as role_name,permission.id as permission_id, permission.name as permission_name,permission.role_id as p_role_id 
+      FROM user 
+      LEFT JOIN role
+      ON user.role_id = role.id
+      LEFT JOIN permission
+      ON permission.role_id = role.id
+      WHERE user.username = #{username} AND user.is_deleted = 0
   </select>
 
   <select id="findUserById" parameterType="int" resultMap="user">
@@ -31,6 +36,24 @@
     WHERE id = #{id}
   </update>
 
+  <select id="getUserToken" resultType="String">
+    SELECT user.token
+    FROM user
+    WHERE user.id = #{id}
+  </select>
+
+  <select id="getTokenByUsername" resultType="String">
+    SELECT user.token
+    FROM user
+    WHERE user.username = #{username}
+  </select>
+  
+  <update id="updateUserToken">
+    UPDATE user
+    SET token = #{token}
+    WHERE id = #{id}
+  </update>
+
   <resultMap type="top.yjzloveyzh.common.pojo.User" id="user">
     <id column="id" property="id" />
     <result column="username" property="username" />
@@ -42,6 +65,7 @@
     <result column="area" property="area" />
     <result column="tel_phone" property="telPhone" />
     <result column="zip_code" property="zipCode" />
+    <result column="token" property="token" />
     <association property="role" javaType="top.yjzloveyzh.common.pojo.Role" resultMap="role"></association>
   </resultMap>
 

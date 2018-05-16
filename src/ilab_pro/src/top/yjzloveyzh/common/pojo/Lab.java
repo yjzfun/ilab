@@ -9,7 +9,7 @@ public class Lab {
     private int userId;
     private Date updatedAt;
     private Date createdAt;
-
+    private String brief;
 
     public Lab() {
     }
@@ -60,5 +60,13 @@ public class Lab {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getBrief() {
+        return brief;
+    }
+
+    public void setBrief(String brief) {
+        this.brief = brief;
     }
 }

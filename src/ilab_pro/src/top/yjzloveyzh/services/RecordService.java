@@ -1,5 +1,6 @@
 package top.yjzloveyzh.services;
 
+import top.yjzloveyzh.common.exception.EquipmentException;
 import top.yjzloveyzh.common.exception.RecordException;
 import top.yjzloveyzh.common.pojo.Pagination;
 import top.yjzloveyzh.common.pojo.RequestBuyRecord;
@@ -30,8 +31,9 @@ public interface RecordService {
      * @param user
      * @return
      * @throws RecordException
+     * @throws EquipmentException
      */
-    int approveRequestBuyRecord(String id, String operation, User user) throws RecordException;
+    int approveRequestBuyRecord(String id, String operation, User user) throws RecordException, EquipmentException;
 
     /**
      * 获取已经答复了的购置记录

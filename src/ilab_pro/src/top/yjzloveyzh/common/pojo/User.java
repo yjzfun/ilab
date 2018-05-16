@@ -20,6 +20,7 @@ public class User implements Serializable{
     private String zipCode;
     private Date updatedAt;
     private Date createdAt;
+    private String token;
 
     public int getId() {
         return id;
@@ -134,6 +135,14 @@ public class User implements Serializable{
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override

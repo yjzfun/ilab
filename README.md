@@ -40,7 +40,7 @@ mvn install
 其余请参考[如何使用eclipse搭建SSM](https://blog.csdn.net/luffysk/article/details/81608973)
 
 ## 论文
-论文的[地址](), 在重申一遍， 仅供参考， 不过就算抄袭， 论文最后查重也过不了的。
+论文的[地址](https://github.com/lovemyhan/ilab/blob/master/doc/SSM%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-3%E7%A8%BF.docx)(非最终版！非最终版！非最终版！年代久远，文档丢失，这已经是最接近终稿的论文了), 再重申一遍， 仅供参考， 不过就算抄袭， 论文最后查重也过不了的。
 
 ## 最后
 如果还有什么问题， 欢迎提issue， 或者通过邮箱的方式联系我

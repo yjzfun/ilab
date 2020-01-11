@@ -81,8 +81,8 @@ CREATE TABLE `equipment` (
   `lab_id` int(11) NOT NULL,
   `delete_record_id` int(11) DEFAULT '0',
   `is_deleted` tinyint(1) DEFAULT '0',
-  `created_at` datetime DEFAULT '0000-00-00 00:00:00',
-  `updated_at` datetime DEFAULT '0000-00-00 00:00:00',
+  `created_at` datetime,
+  `updated_at` datetime,
   PRIMARY KEY (`id`),
   KEY `fk_equipment_request_buy_record1_idx` (`request_buy_record_id`),
   KEY `fk_equipment_lab1_idx` (`lab_id`),
@@ -358,5 +358,5 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('4', 'yjz123', 'yjz123', '男', '0', '0', '171882105@qq.com', '杨嘉志', '山西省侯马市红卫厂32#', '山西-临汾-侯马市', null, '1', '15503622641', '043000', null, null, 'b976c2fdcd86761e0723eea63f1ee4d0');
-INSERT INTO `user` VALUES ('6', 'yjz', 'yjz123', '男', '0', '0', '171882105@qq.com', '杨嘉志', '', '山西-太原-小店区', null, '0', '15503622641', '043000', null, null, null);
+INSERT INTO `user` VALUES ('4', 'admin', 'admin', '男', '0', '0', '171882105@qq.com', '嫦娥', '地球村', 'em.....', null, '1', '13212341234', '043000', null, null, 'b976c2fdcd86761e0723eea63f1ee4d0');
+INSERT INTO `user` VALUES ('6', 'yjz', 'yjz123', '男', '0', '0', '171882105@qq.com', '玉兔', '', '山西-太原-小店区', null, '0', '13212341234', '043000', null, null, null);
